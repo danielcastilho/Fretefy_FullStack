@@ -4,8 +4,8 @@ using System.Collections.Generic;
 
 namespace Fretefy.Test.Domain.Interfaces
 {
-    public interface ICidadeService : IGenericService<Cidade>
+    public interface IRegiaoService : IGenericService<Regiao>
     {
-        IEnumerable<Cidade> ListByUf(string uf);
+        // Funcionalidade específica de Região
     }
 }

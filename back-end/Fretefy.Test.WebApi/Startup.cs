@@ -26,8 +26,7 @@ namespace Fretefy.Test.WebApi
             ConfigureInfraService(services);
             ConfigureDomainService(services);
 
-            services.AddMvc()
-                .SetCompatibilityVersion(Microsoft.AspNetCore.Mvc.CompatibilityVersion.Latest);
+            services.AddMvc();
         }
 
         private void ConfigureDomainService(IServiceCollection services)

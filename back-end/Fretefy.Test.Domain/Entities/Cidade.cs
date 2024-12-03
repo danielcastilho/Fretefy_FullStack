@@ -6,7 +6,7 @@ namespace Fretefy.Test.Domain.Entities
     {
         public Cidade()
         {
-        
+            Id = Guid.NewGuid();
         }
 
         public Cidade(string nome, string uf)

@@ -4,10 +4,8 @@ using System.Linq;
 
 namespace Fretefy.Test.Domain.Interfaces.Repositories
 {
-    public interface ICidadeRepository
+    public interface ICidadeRepository: IGenericRepository<Cidade>
     {
-        IQueryable<Cidade> List();
         IEnumerable<Cidade> ListByUf(string uf);
-        IEnumerable<Cidade> Query(string terms);
     }
 }

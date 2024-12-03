@@ -8,33 +8,16 @@ using System.Text;
 
 namespace Fretefy.Test.Domain.Services
 {
-    public class CidadeService : ICidadeService
+    public class CidadeService : ServiceBase<Cidade>, ICidadeService
     {
-        private readonly ICidadeRepository _cidadeRepository;
+        private ICidadeRepository _cidadeRepository => base._repository as ICidadeRepository;
 
-        public CidadeService(ICidadeRepository cidadeRepository)
-        {
-            _cidadeRepository = cidadeRepository;
-        }
-
-        public Cidade Get(Guid id)
-        {
-            return _cidadeRepository.List().FirstOrDefault(f => f.Id == id);
-        }
-
-        public IEnumerable<Cidade> List()
-        {
-            return _cidadeRepository.List();
-        }
-
+        public CidadeService(ICidadeRepository cidadeRepository) : base(cidadeRepository) {}
+        
         public IEnumerable<Cidade> ListByUf(string uf)
         {
             return _cidadeRepository.ListByUf(uf);
         }
 
-        public IEnumerable<Cidade> Query(string terms)
-        {
-            return _cidadeRepository.Query(terms);
-        }
     }
 }
