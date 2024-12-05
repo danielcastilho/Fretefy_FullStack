@@ -1,0 +1,4 @@
+{
+    "versionlens.npm.files": "front-end/package.json",
+    "npm.enableRunFromFolder": true
+}
