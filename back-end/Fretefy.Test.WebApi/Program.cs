@@ -63,7 +63,6 @@ app.UseSwaggerUI(c =>
 });
 
 
-app.UsePathBase("/api");
 
 // Configure the HTTP request pipeline.
 app.UseRouting();
