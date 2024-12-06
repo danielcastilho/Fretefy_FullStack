@@ -13,45 +13,48 @@ using Microsoft.Extensions.Hosting;
 
 namespace Fretefy.Test.WebApi
 {
-    public class Startup
-    {
-        public void ConfigureServices(IServiceCollection services)
-        {
-            services.AddScoped<DbContext, TestDbContext>();
-            services.AddDbContext<TestDbContext>((provider, options) =>
-            {
-                options.UseSqlite("Data Source=Data\\Test.db");
-            });
+    // TODO: Remove this file
+    
+    // Migrate Startup class to sim0plified new program.cs approach with WebApplication class.
+    // public class Startup
+    // {
+    //     public void ConfigureServices(IServiceCollection services)
+    //     {
+    //         services.AddScoped<DbContext, TestDbContext>();
+    //         services.AddDbContext<TestDbContext>((provider, options) =>
+    //         {
+    //             options.UseSqlite("Data Source=Data\\Test.db");
+    //         });
 
-            ConfigureInfraService(services);
-            ConfigureDomainService(services);
+    //         ConfigureInfraService(services);
+    //         ConfigureDomainService(services);
 
-            services.AddMvc();
-        }
+    //         services.AddMvc();
+    //     }
 
-        private void ConfigureDomainService(IServiceCollection services)
-        {
-            services.AddScoped<ICidadeService, CidadeService>();
-        }
+    //     private void ConfigureDomainService(IServiceCollection services)
+    //     {
+    //         services.AddScoped<ICidadeService, CidadeService>();
+    //     }
 
-        private void ConfigureInfraService(IServiceCollection services)
-        {
-            services.AddScoped<ICidadeRepository, CidadeRepository>();
-        }
+    //     private void ConfigureInfraService(IServiceCollection services)
+    //     {
+    //         services.AddScoped<ICidadeRepository, CidadeRepository>();
+    //     }
 
-        public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
-        {
-            if (env.IsDevelopment())
-            {
-                app.UseDeveloperExceptionPage();
-            }
+    //     public void Configure(IApplicationBuilder app, IWebHostEnvironment env)
+    //     {
+    //         if (env.IsDevelopment())
+    //         {
+    //             app.UseDeveloperExceptionPage();
+    //         }
 
-            app.UseRouting();
+    //         app.UseRouting();
 
-            app.UseEndpoints(endpoints =>
-            {
-                endpoints.MapControllers();
-            });
-        }
-    }
+    //         app.UseEndpoints(endpoints =>
+    //         {
+    //             endpoints.MapControllers();
+    //         });
+    //     }
+    // }
 }
