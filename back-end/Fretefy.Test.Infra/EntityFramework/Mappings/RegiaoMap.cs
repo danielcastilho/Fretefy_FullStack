@@ -10,15 +10,16 @@ namespace Fretefy.Test.Infra.EntityFramework.Mappings
         public void Configure(EntityTypeBuilder<Regiao> builder)
         {
             builder.HasKey(p => p.Id);
+            builder.HasIndex(p => p.Nome).IsUnique();
             builder.Property(p => p.Nome).HasMaxLength(1024).IsRequired();
-            builder.HasMany<Cidade>(r=>r.Cidades)
+            builder
+                .HasMany<Cidade>(r => r.Cidades)
                 .WithOne()
                 .OnDelete(DeleteBehavior.ClientSetNull)
                 .HasForeignKey("RegiaoId")
                 .IsRequired(false);
             builder.Navigation(r => r.Cidades).AutoInclude(); // Include Cidades automatically in queries as desired in this test project
-                                                               // Not recommended in production projects
-                
+            // Not recommended in production projects
         }
     }
 }

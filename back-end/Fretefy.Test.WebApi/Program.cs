@@ -3,6 +3,7 @@ using Fretefy.Test.Domain.Interfaces.Repositories;
 using Fretefy.Test.Domain.Services;
 using Fretefy.Test.Infra.EntityFramework;
 using Fretefy.Test.Infra.EntityFramework.Repositories;
+using Fretefy.Test.WebApi.Mapping;
 using Microsoft.AspNetCore.Builder;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Diagnostics;
@@ -15,19 +16,20 @@ var builder = WebApplication.CreateBuilder(args);
 // Inject services into the container.
 var services = builder.Services;
 
-
 services.AddScoped<DbContext, TestDbContext>();
 
 // Register DbContext
-services.AddDbContext<TestDbContext>(options => {
+services.AddDbContext<TestDbContext>(options =>
+{
     options.UseSqlite("Data Source=Data/Test.db");
     options.ConfigureWarnings(w => w.Ignore(RelationalEventId.PendingModelChangesWarning));
 });
-    
 
 // Services injection. TODO: On Infra Module create DI classes for services registrations.
 services.AddScoped<ICidadeRepository, CidadeRepository>();
 services.AddScoped<ICidadeService, CidadeService>();
+services.AddScoped<IRegiaoRepository, RegiaoRepository>();
+services.AddScoped<IRegiaoService, RegiaoService>();
 
 // Add Swagger services.
 services.AddSwaggerGen(c =>
@@ -35,6 +37,8 @@ services.AddSwaggerGen(c =>
     c.SwaggerDoc("v1", new OpenApiInfo { Title = "Fretefy API", Version = "v1" });
 });
 
+// AutoMapper services and mappings.
+services.AddAutoMapper(typeof(MappingProfile));
 
 // Add controllers.
 services.AddControllers();
@@ -49,8 +53,6 @@ using (var scope = app.Services.CreateScope())
     context.Database.EnsureCreated();
 }
 
-
-
 // Enable middleware to serve generated Swagger as a JSON endpoint.
 app.UseSwagger();
 
@@ -62,10 +64,9 @@ app.UseSwaggerUI(c =>
     c.RoutePrefix = "docs"; //  Sets the path to the Swagger UI to /docs
 });
 
-
-
 // Configure the HTTP request pipeline.
 app.UseRouting();
+
 // Add controllers to the request pipeline.
 app.MapControllers();
 

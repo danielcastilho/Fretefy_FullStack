@@ -54,7 +54,11 @@
                 "qwtel.sqlite-viewer",
                 "redhat.vscode-yaml",
                 "usernamehw.errorlens",
-                "csharpier.csharpier-vscode"
+                "csharpier.csharpier-vscode",
+                "MS-CEINTL.vscode-language-pack-pt-BR",
+                "cyrilletuzi.angular-schematics",
+                "kreativ-software.csharpextensions",
+                "EditorConfig.EditorConfig"
             ]
         }
     }

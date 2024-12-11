@@ -1,4 +1,5 @@
-﻿using Fretefy.Test.Domain.Entities;
+﻿using System;
+using Fretefy.Test.Domain.Entities;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Metadata.Builders;
 
@@ -10,7 +11,11 @@ namespace Fretefy.Test.Infra.EntityFramework.Mappings
         {
             _ = builder.HasKey(p => p.Id);
             _ = builder.Property(p => p.Nome).HasMaxLength(1024).IsRequired();
-            _ = builder.Property(p => p.UF).HasMaxLength(2).IsRequired();
+            _ = builder
+                .Property(p => p.UF)
+                .HasMaxLength(2)
+                .IsRequired()
+                .HasAnnotation("RegularExpression", "^[A-Z]{2}$");
 
             _ = builder.HasData(
                 new Cidade { Nome = "Rio Branco", UF = "AC" },

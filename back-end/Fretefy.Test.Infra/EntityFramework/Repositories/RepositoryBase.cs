@@ -1,14 +1,18 @@
 using System;
 using System.Collections.Generic;
+using System.ComponentModel.DataAnnotations;
 using System.Linq;
 using System.Threading.Tasks;
 using Fretefy.Test.Domain.Entities;
 using Fretefy.Test.Domain.Interfaces.Repositories;
+using Microsoft.AspNetCore.JsonPatch;
+using Microsoft.AspNetCore.Mvc.ModelBinding;
 using Microsoft.EntityFrameworkCore;
 
 namespace Fretefy.Test.Infra.EntityFramework.Repositories
 {
-    public class RepositoryBase<T> : IGenericRepository<T> where T : class, IEntity
+    public class RepositoryBase<T> : IGenericRepository<T>
+        where T : class, IEntity
     {
         protected DbSet<T> _dbSet;
         protected readonly DbContext _context;
@@ -41,35 +45,25 @@ namespace Fretefy.Test.Infra.EntityFramework.Repositories
             return newEntity;
         }
 
-        public async Task<bool> Update(Guid id, T entityValues)
+        public async Task<bool> Update(Guid id, T values)
         {
             var entity = await Get(id);
-            if (entity == null) return false;
-            
-            _context.Entry(entity).CurrentValues.SetValues(entityValues);
-            return await _context.SaveChangesAsync() > 0;
-        }
+            if (entity == null)
+                return false;
 
-        public async Task<bool> Update(Guid id, Dictionary<string, object> values)
-        {
-            var entity = await Get(id);
-            if (entity == null) return false;
+            _context.Entry(entity).CurrentValues.SetValues(values);
 
-            foreach (var item in values)
-            {
-                _context.Entry(entity).Property(item.Key).CurrentValue = item.Value;
-            }
             return await _context.SaveChangesAsync() > 0;
         }
 
         public async Task<bool> Delete(Guid id)
         {
             var entity = await Get(id);
-            if (entity == null) return false;
+            if (entity == null)
+                return false;
 
             _dbSet.Remove(entity);
             return await _context.SaveChangesAsync() > 0;
         }
-        
     }
 }
