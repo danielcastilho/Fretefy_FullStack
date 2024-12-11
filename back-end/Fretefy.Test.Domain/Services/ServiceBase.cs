@@ -5,6 +5,7 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
+using System.Threading.Tasks;
 
 namespace Fretefy.Test.Domain.Services
 {
@@ -17,19 +18,19 @@ namespace Fretefy.Test.Domain.Services
             _repository = repository;
         }
 
-        public T Get(Guid id)
+        public async Task<T> Get(Guid id)
         {
-            return _repository.List().FirstOrDefault(f => f.Id == id);
+            return (await _repository.List()).FirstOrDefault(f => f.Id == id);
         }
 
-        public IEnumerable<T> List()
+        public async Task<IEnumerable<T>> List()
         {
-            return _repository.List();
+            return await _repository.List();
         }
 
-        public IEnumerable<T> Query(string terms)
+        public async Task<IEnumerable<T>> Query(string terms)
         {
-            return _repository.Query(terms);
+            return await _repository.Query(terms);
         }
     }
 }

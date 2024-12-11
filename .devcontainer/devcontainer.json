@@ -13,9 +13,6 @@
             "pnpmVersion": "latest",
             "nvmVersion": "latest"
         },
-        "ghcr.io/devcontainers-extra/features/angular-cli:2": {
-            "version": "latest"
-        },
         "ghcr.io/devcontainers/features/common-utils:2": {
             "installZsh": true,
             "configureZshAsDefaultShell": true,
@@ -31,9 +28,14 @@
             "plugins": "ssh-agent npm dotnet docker docker-compose nvm yarn",
             "omzPlugins": "https://github.com/zsh-users/zsh-autosuggestions",
             "username": "vscode"
+        },
+		"ghcr.io/devcontainers/features/docker-in-docker:2": {
+            "version": "latest",
+            "dockerDashComposeVersion": "latest"
+        },
+        "ghcr.io/nikiforovall/devcontainer-features/dotnet-csharpier:1": {
+            
         }
-		// "ghcr.io/devcontainers/features/docker-in-docker:2": {},
-		// "ghcr.io/devcontainers/features/node:1": {},
 		// "ghcr.io/devcontainers-extra/features/typescript:2": {}
     },
     "customizations": {
@@ -43,7 +45,16 @@
                 "Angular.ng-template",
                 "dbaeumer.vscode-eslint",
                 "esbenp.prettier-vscode",
-                "christian-kohler.path-intellisense"
+                "christian-kohler.path-intellisense",
+                "ms-dotnettools.csdevkit",
+                "ms-azuretools.vscode-docker",
+                "ms-dotnettools.vscodeintellicode-csharp",
+                "christian-kohler.npm-intellisense",
+                "patcx.vscode-nuget-gallery",
+                "qwtel.sqlite-viewer",
+                "redhat.vscode-yaml",
+                "usernamehw.errorlens",
+                "csharpier.csharpier-vscode"
             ]
         }
     }
